@@ -29,6 +29,9 @@ class RootStore {
       this.days.push(currentDate);
       startDate.add(1, "day");
     }
+    
+    this.selectedDay = this.days[0];
+    this.selectedPeriod = this.periods[0];
 
     this.times = [];
 

@@ -13,6 +13,9 @@ const DayItem = ({ day, rootStore }: Props) => {
   const handleClick = () => {
     setSelectedDay(day);
   };
+
+  console.log('selectedDay', selectedDay)
+  console.log('day', day)
   
   return (
     <button
