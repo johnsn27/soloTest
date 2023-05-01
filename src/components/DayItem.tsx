@@ -1,9 +1,12 @@
+import moment from ''
+
 interface Props {
   day: string;
 }
 
 const DayItem = ({ day }: Props) => {
-  return <button className="dayItem">{day}</button>;
+  const formattedDay = moment(day).format("MMM Do YYYY");
+  return <button className="dayItem">{formattedDay}</button>;
 };
 
 export default DayItem;
