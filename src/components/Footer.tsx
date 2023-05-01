@@ -8,6 +8,8 @@ const Footer = observer(() => {
     rootStore.requestBooking();
   };
 
+  const isTimeSelected = !!rootStore.selectedTime; // check if a time is selected
+
   return (
     <div className="footer">
       <div>
@@ -16,7 +18,13 @@ const Footer = observer(() => {
         </p>
         <p>0 professionals available</p>
       </div>
-      <button className="bookButton" onClick={handleBookNow} >Book Now</button>
+      <button
+        className="bookButton"
+        onClick={handleBookNow}
+        disabled={!isTimeSelected}
+      >
+        Book Now
+      </button>
     </div>
   );
 });
