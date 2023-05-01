@@ -1,6 +1,6 @@
-import moment from 'moment';
 import RootStore from '../RootStore';
 import { observer } from "mobx-react-lite";
+import FormatTime from '../helpers/formatTime';
 
 interface Props {
   time: number;
@@ -14,13 +14,7 @@ const TimeItem = observer(({ time, rootStore }: Props) => {
     setSelectedTime(time);
   };
 
-  const hours = Math.floor(time);
-  const minutes = (time - hours) * 60;
-
-  const formattedTime = moment()
-    .hour(hours)
-    .minute(minutes)
-    .format('h:mm A');
+  const formattedTime = FormatTime(time)
 
 
     return (
