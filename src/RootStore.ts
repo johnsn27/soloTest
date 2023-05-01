@@ -1,5 +1,7 @@
 import { makeObservable, observable, action } from "mobx";
 import moment from 'moment';
+import { FormatDateDDMY } from "./helpers/formatDate";
+import FormatTime from "./helpers/formatTime";
 
 class RootStore {
   days: string[] = [];
@@ -59,6 +61,17 @@ class RootStore {
   requestBooking = () => {
     alert("Booking requested!");
   };
+
+  get selectedDateTime() {
+    if (this.selectedDay && this.selectedTime) {
+      const formattedDate = FormatDateDDMY(this.selectedDay)
+      const formattedTime = FormatTime(this.selectedTime)
+      const dateTime = formattedTime + ' on ' + formattedDate;
+      return dateTime;
+    } else {
+      return "Please select a time";
+    }
+  }
 }
 
 export default RootStore;

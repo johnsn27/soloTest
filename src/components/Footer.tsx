@@ -1,6 +1,7 @@
 import { useStore } from "../App";
+import { observer } from "mobx-react-lite";
 
-const Footer = () => {
+const Footer = observer(() => {
   const rootStore = useStore();
 
   const handleBookNow = () => {
@@ -11,13 +12,13 @@ const Footer = () => {
     <div className="footer">
       <div>
         <p>
-          <b>Selected Date & Time</b>
+        <b>{rootStore.selectedDateTime}</b>
         </p>
         <p>0 professionals available</p>
       </div>
       <button className="bookButton" onClick={handleBookNow} >Book Now</button>
     </div>
   );
-};
+});
 
 export default Footer;
