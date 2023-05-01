@@ -45,6 +45,7 @@ class RootStore {
   
   setSelectedDay = action((day: string | null) => {
     this.selectedDay = day;
+    this.selectedTime = null;
   });
 
   setSelectedTime = action((time: number) => {
