@@ -7,6 +7,7 @@ class RootStore {
   selectedTime: number | null = null;
   times: number[] = [];
   periods = ["Anytime", "Morning", "Afternoon", "Evening"];
+  selectedPeriod: string | null = null;
 
   constructor() {
     makeObservable(this, {
@@ -16,6 +17,8 @@ class RootStore {
       setSelectedDay: action,
       selectedTime: observable,
       setSelectedTime: action,
+      selectedPeriod: observable,
+      setSelectedPeriod: action,
     });
 
     const startDate = moment().startOf("day");
@@ -43,6 +46,10 @@ class RootStore {
 
   setSelectedTime = action((time: number) => {
     this.selectedTime = time;
+  });
+
+  setSelectedPeriod = action((period: string | null) => {
+    this.selectedPeriod = period;
   });
 
   requestBooking = () => {
