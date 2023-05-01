@@ -2,6 +2,7 @@ import { makeObservable, observable, action } from "mobx";
 import moment from 'moment';
 import { FormatDateDDMY } from "./helpers/formatDate";
 import FormatTime from "./helpers/formatTime";
+import mockApi from "./mockApi";
 
 class RootStore {
   days: string[] = [];
@@ -72,8 +73,12 @@ class RootStore {
     this.selectedTime = null; // clear selectedTime when a new period is selected
   });
 
-  requestBooking = () => {
-    alert("Booking requested!");
+  requestBooking = async () => {
+    const dayOfMonth = parseInt(this.selectedDay.split(" ")[2]);
+    const numPros = await mockApi.getNumberOfPros(dayOfMonth);
+    const dateTime = this.selectedDateTime;
+    const message = `Your booking has been made for ${dateTime}. We have sent your request to ${numPros} professional${numPros === 1 ? "" : "s"}.`;
+    alert(message);
   };
 
   get selectedDateTime() {
