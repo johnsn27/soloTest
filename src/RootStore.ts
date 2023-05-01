@@ -1,4 +1,5 @@
 import { makeObservable, observable } from "mobx";
+import moment from 'moment';
 
 class RootStore {
   days: string[] = [];
@@ -11,14 +12,20 @@ class RootStore {
       times: observable,
     });
 
+    const startDate = moment().startOf("day");
+    const endDate = moment().add(27, "days").startOf("day");
+    const days: string[] = [];
+    
+    while (startDate.isSameOrBefore(endDate)) {
+      const currentDate = startDate.toString();
+      days.push(currentDate);
+      startDate.add(1, "day");
+    }
+
+    this.days = days;
+    
+    
     this.times = [6, 6.25, 6.5, 6.75, 7, 7.25, 7.5, 7.75, 8, 8.25, 8.5, 8.75];
-    this.days = [
-      "2021-01-01",
-      "2021-01-02",
-      "2021-01-03",
-      "2021-01-04",
-      "2021-01-05",
-    ];
   }
 
   requestBooking = () => {
