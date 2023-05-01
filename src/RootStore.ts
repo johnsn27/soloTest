@@ -4,6 +4,7 @@ import moment from 'moment';
 class RootStore {
   days: string[] = [];
   selectedDay: string | null = null;
+  selectedTime: number | null = null;
   times: number[] = [];
   periods = ["Anytime", "Morning", "Afternoon", "Evening"];
 
@@ -13,6 +14,8 @@ class RootStore {
       times: observable,
       selectedDay: observable,
       setSelectedDay: action,
+      selectedTime: observable,
+      setSelectedTime: action,
     });
 
     const startDate = moment().startOf("day");
@@ -36,6 +39,10 @@ class RootStore {
   
   setSelectedDay = action((day: string | null) => {
     this.selectedDay = day;
+  });
+
+  setSelectedTime = action((time: number) => {
+    this.selectedTime = time;
   });
 
   requestBooking = () => {

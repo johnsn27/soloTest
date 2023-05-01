@@ -7,7 +7,7 @@ const TimeList = () => {
   return (
     <div className="timeList">
       {rootStore.times.map((t) => (
-        <TimeItem time={t} key={t} />
+        <TimeItem time={t} key={t} rootStore={rootStore} />
       ))}
     </div>
   );
