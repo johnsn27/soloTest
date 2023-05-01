@@ -18,11 +18,9 @@ class RootStore {
     
     while (startDate.isSameOrBefore(endDate)) {
       const currentDate = startDate.toString();
-      days.push(currentDate);
+      this.days.push(currentDate);
       startDate.add(1, "day");
     }
-
-    this.days = days;
     
     
     this.times = [6, 6.25, 6.5, 6.75, 7, 7.25, 7.5, 7.75, 8, 8.25, 8.5, 8.75];
