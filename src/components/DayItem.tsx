@@ -19,7 +19,7 @@ const DayItem = ({ day, rootStore }: Props) => {
       className={`dayItem ${selectedDay === day ? "selected" : ""}`}
       onClick={handleClick}
     >
-      {day}
+      {formattedDay}
     </button>
   );
 };
