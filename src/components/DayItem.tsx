@@ -1,4 +1,4 @@
-import moment from ''
+import moment from 'moment';
 
 interface Props {
   day: string;
