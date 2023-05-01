@@ -22,7 +22,14 @@ const TimeItem = ({ time, rootStore }: Props) => {
     .format('h:mm A');
 
 
-  return <button className="timeItem" onClick={handleClick}>{formattedTime}</button>;
+    return (
+      <button
+        className={`timeItem ${selectedTime === time ? "selected" : ""}`}
+        onClick={handleClick}
+      >
+        {time}
+      </button>
+    );
 };
 
 export default TimeItem;

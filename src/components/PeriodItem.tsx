@@ -12,7 +12,14 @@ const PeriodItem = ({ period, rootStore }: Props) => {
     setSelectedPeriod(period);
   };
 
-  return <button className="periodItem" onClick={handleClick}>{period}</button>;
+  return (
+    <button
+      className={`periodItem ${selectedPeriod === period ? "selected" : ""}`}
+      onClick={handleClick}
+    >
+      {period}
+    </button>
+  );
 };
 
 export default PeriodItem;

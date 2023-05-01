@@ -14,7 +14,14 @@ const DayItem = ({ day, rootStore }: Props) => {
     setSelectedDay(day);
   };
   
-  return <button className="dayItem" onClick={handleClick}>{formattedDay}</button>;
+  return (
+    <button
+      className={`dayItem ${selectedDay === day ? "selected" : ""}`}
+      onClick={handleClick}
+    >
+      {day}
+    </button>
+  );
 };
 
 export default DayItem;
