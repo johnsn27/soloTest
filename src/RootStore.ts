@@ -9,12 +9,15 @@ class RootStore {
   selectedTime: number | null = null;
   times: number[] = [];
   periods = ["Anytime", "Morning", "Afternoon", "Evening"];
+  filteredTimes: number[] = [];
+  allTimes: number[] = [];
   selectedPeriod: string | null = null;
 
   constructor() {
     makeObservable(this, {
       days: observable,
       times: observable,
+      filteredTimes: observable,
       selectedDay: observable,
       setSelectedDay: action,
       selectedTime: observable,
@@ -34,15 +37,18 @@ class RootStore {
     
     this.selectedDay = this.days[0];
     this.selectedPeriod = this.periods[0];
-
+    
     this.times = [];
-
+    
     for (let hour = 6; hour < 22; hour++) {
       for (let minute = 0; minute < 100; minute += 25) {
         const time = Number(`${hour}.${minute.toString()}`);
         this.times.push(time);
       }
     }
+    this.filteredTimes = this.times.slice();
+    this.allTimes = this.times;
+    this.setSelectedPeriod(this.selectedPeriod);
   }
   
   setSelectedDay = action((day: string | null) => {
@@ -56,6 +62,14 @@ class RootStore {
 
   setSelectedPeriod = action((period: string | null) => {
     this.selectedPeriod = period;
+    console.log('this.selectedPeriod', this.selectedPeriod)
+    const startTime = this.getStartTime(period || ""); // add null check for period
+    const endTime = this.getEndTime(period || ""); // add null check for period
+    const filteredTimes = this.filterTimes(startTime, endTime);
+    console.log('filteredTimes', filteredTimes)
+    const filteredTimesCopy = [...filteredTimes]; // make a copy of filtered times
+    this.times = this.allTimes.filter((time) => filteredTimesCopy.includes(time));
+    this.selectedTime = null; // clear selectedTime when a new period is selected
   });
 
   requestBooking = () => {
@@ -72,6 +86,44 @@ class RootStore {
       return "Please select a time";
     }
   }
+
+  getStartTime = (period: string) => {
+    console.log('period', period)
+    switch (period) {
+      case "Anytime":
+        return 6;
+      case "Morning":
+        return 6;
+      case "Afternoon":
+        return 12;
+      case "Evening":
+        return 15;
+      default:
+        return 6;
+    }
+  };
+
+  getEndTime = (period: string) => {
+    switch (period) {
+      case "Anytime":
+        return 9.75;
+      case "Morning":
+        return 11.75;
+      case "Afternoon":
+        return 16.75;
+      case "Evening":
+        return 21.75;
+      default:
+        return 21.75;
+    }
+  };  
+  
+  filterTimes = (startTime: number, endTime: number) => {
+    console.log('filteredTimes', this.filteredTimes)
+    return this.filteredTimes.filter((time) => {
+      return time >= startTime && time <= endTime;
+    });
+  };
 }
 
 export default RootStore;
