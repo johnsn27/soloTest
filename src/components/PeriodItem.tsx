@@ -21,6 +21,6 @@ const PeriodItem = observer(({ period, rootStore }: Props) => {
       {period}
     </button>
   );
-};
+});
 
 export default PeriodItem;
