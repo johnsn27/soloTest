@@ -1,8 +1,9 @@
-import { makeObservable, observable } from "mobx";
+import { makeObservable, observable, action } from "mobx";
 import moment from 'moment';
 
 class RootStore {
   days: string[] = [];
+  selectedDay: string | null = null;
   times: number[] = [];
   periods = ["Anytime", "Morning", "Afternoon", "Evening"];
 
@@ -10,6 +11,8 @@ class RootStore {
     makeObservable(this, {
       days: observable,
       times: observable,
+      selectedDay: observable,
+      setSelectedDay: action,
     });
 
     const startDate = moment().startOf("day");
@@ -30,6 +33,10 @@ class RootStore {
       }
     }
   }
+  
+  setSelectedDay = action((day: string | null) => {
+    this.selectedDay = day;
+  });
 
   requestBooking = () => {
     alert("Booking requested!");

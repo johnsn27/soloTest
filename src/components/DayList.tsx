@@ -7,7 +7,7 @@ const DayList = () => {
   return (
     <div className="dayList">
       {rootStore.days.map((d) => (
-        <DayItem day={d} key={d} />
+        <DayItem day={d} key={d} rootStore={rootStore} />
       ))}
     </div>
   );
