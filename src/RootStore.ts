@@ -14,18 +14,22 @@ class RootStore {
 
     const startDate = moment().startOf("day");
     const endDate = moment().add(27, "days").startOf("day");
-    const days: string[] = [];
     
     while (startDate.isSameOrBefore(endDate)) {
       const currentDate = startDate.toString();
-      days.push(currentDate);
+      this.days.push(currentDate);
       startDate.add(1, "day");
     }
 
-    this.days = days;
-    
-    
-    this.times = [6, 6.25, 6.5, 6.75, 7, 7.25, 7.5, 7.75, 8, 8.25, 8.5, 8.75];
+    this.times = [];
+
+    for (let hour = 6; hour < 22; hour++) {
+      for (let minute = 0; minute < 60; minute += 15) {
+        const time = Number(`${hour}.${minute.toString().padStart(2, '0')}`);
+        this.times.push(time);
+      }
+    }
+
   }
 
   requestBooking = () => {
