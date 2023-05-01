@@ -1,11 +1,12 @@
 import RootStore from '../RootStore'
+import { observer } from "mobx-react-lite";
 
 interface Props {
   period: string;
   rootStore: RootStore;
 }
 
-const PeriodItem = ({ period, rootStore }: Props) => {
+const PeriodItem = observer(({ period, rootStore }: Props) => {
   const { selectedPeriod, setSelectedPeriod } = rootStore;
 
   const handleClick = () => {

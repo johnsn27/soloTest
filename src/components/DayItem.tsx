@@ -1,12 +1,13 @@
 import moment from 'moment';
 import RootStore from '../RootStore';
+import { observer } from "mobx-react-lite";
 
 interface Props {
   day: string;
   rootStore: RootStore;
 }
 
-const DayItem = ({ day, rootStore }: Props) => {
+const DayItem = observer(({ day, rootStore }: Props) => {
   const formattedDay = moment(day).format("MMM Do YYYY");
   const { selectedDay, setSelectedDay } = rootStore;
 
@@ -25,6 +26,6 @@ const DayItem = ({ day, rootStore }: Props) => {
       {formattedDay}
     </button>
   );
-};
+});
 
 export default DayItem;
